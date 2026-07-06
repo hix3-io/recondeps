@@ -280,7 +280,7 @@ func (m *MassScanner) Run(domainsFile string) error {
 	m.stats.Start = time.Now()
 	atomic.StoreInt64(&m.stats.Total, int64(len(domains)))
 
-	fmt.Printf("recondeps-ng v%s — mass scan\n", VERSION)
+	fmt.Printf("recondeps v%s — mass scan\n", VERSION)
 	fmt.Printf("domains=%d workers=%d resume=%v resolve=%v out=%s\n\n",
 		len(domains), m.opts.Workers, m.opts.Resume, m.opts.Resolve, m.outDir)
 

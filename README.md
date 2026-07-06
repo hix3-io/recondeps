@@ -1,4 +1,4 @@
-# recondeps-ng
+# recondeps
 
 JavaScript **supply-chain reconnaissance** for authorized bug bounty / pentest.
 
@@ -6,17 +6,17 @@ It mines a target's JavaScript for package references, then verifies them agains
 npm to surface **dependency-confusion candidates** — and, crucially, answers the
 real question the old tool never did: *is the `@scope` actually claimable?*
 
-## Why a rewrite
+## Design goals
 
-The legacy `recondeps` looked capable on paper but its value features were
-stubbed or broken: base64 "obfuscation detection" returned `""`, the single-URL
-display was always empty, source maps were ignored, and every npm non-200 (incl.
-429 rate-limits) was labelled "private" — manufacturing false targets at scale.
-`recondeps-ng` is built to close those gaps. See `CHANGELOG.md`.
+Naive dependency scanners manufacture false targets at scale: they ignore source
+maps, don't really decode obfuscated `require`s, and label *every* npm non-200
+(including 429 rate-limits) as "private". recondeps is built to avoid those traps —
+it decodes what it claims to decode, distinguishes *published / 404 / inconclusive*,
+and only flags a scope when it can reason about claimability. See `CHANGELOG.md`.
 
 ## How it finds what others miss
 
-| Where a private dep can hide | How recondeps-ng gets it |
+| Where a private dep can hide | How recondeps gets it |
 |---|---|
 | Readable `import` / `require` | regex extraction with context |
 | Minified bundle | `node_modules/@org/pkg` path strings |
@@ -28,10 +28,16 @@ display was always empty, source maps were ignored, and every npm non-200 (incl.
 Then for each candidate: query npm (404 vs published vs *inconclusive*), check
 whether the **scope** is occupied or claimable, and emit an exploitability verdict.
 
-## Build
+## Install
 
 ```bash
-make build            # injects VERSION via ldflags -> ./recondeps-ng
+go install github.com/hix3-io/recondeps@latest
+```
+
+Or build from source:
+
+```bash
+make build            # injects VERSION via ldflags -> ./recondeps
 make install          # copies to ~/bin
 ```
 
@@ -39,13 +45,13 @@ make install          # copies to ~/bin
 
 ```bash
 # single target
-./recondeps-ng -url https://target.com
-./recondeps-ng -url https://target.com -json -output out.json
-./recondeps-ng -url https://target.com -resolve=false      # offline, no npm calls
+./recondeps -url https://target.com
+./recondeps -url https://target.com -json -output out.json
+./recondeps -url https://target.com -resolve=false      # offline, no npm calls
 
 # mass scan (bug bounty scope)
-./recondeps-ng -mass domains.txt -workers 100 -npm-rate 8
-./recondeps-ng -mass domains.txt -resume                   # continue an interrupted run
+./recondeps -mass domains.txt -workers 100 -npm-rate 8
+./recondeps -mass domains.txt -resume                   # continue an interrupted run
 ```
 
 Key flags: `-depth` (chunk-follow depth), `-max-assets` (JS cap per target),

@@ -47,7 +47,7 @@ func main() {
 		allHosts  = flag.Bool("all-hosts", false, "follow JS across hosts (default same-host only)")
 		insecure  = flag.Bool("insecure", true, "skip TLS verification")
 		cookie    = flag.String("cookie", "", "Cookie header for authenticated scans")
-		ua        = flag.String("ua", "recondeps-ng/"+VERSION, "User-Agent")
+		ua        = flag.String("ua", "recondeps/"+VERSION, "User-Agent")
 		quiet     = flag.Bool("quiet", false, "mass mode: only print claimable targets")
 		resume    = flag.Bool("resume", false, "mass mode: resume from existing results.ndjson")
 		debug     = flag.Bool("debug", false, "debug output to stderr")
@@ -56,7 +56,7 @@ func main() {
 	flag.Parse()
 
 	if *showVer {
-		fmt.Printf("recondeps-ng v%s\n", VERSION)
+		fmt.Printf("recondeps v%s\n", VERSION)
 		return
 	}
 	if *target == "" && *mass == "" {
@@ -120,7 +120,7 @@ func main() {
 }
 
 func usage() {
-	fmt.Print(strings.ReplaceAll(`recondeps-ng vVER — JS supply-chain reconnaissance
+	fmt.Print(strings.ReplaceAll(`recondeps vVER — JS supply-chain reconnaissance
 
 Finds dependency-confusion candidates by mining JavaScript for package
 references (source maps, bundler paths, imports, obfuscated specifiers),
@@ -128,14 +128,14 @@ then verifying against npm — distinguishing "absent" from "couldn't check"
 and answering the real question: is the @scope claimable?
 
 SINGLE
-  recondeps-ng -url https://target.com
-  recondeps-ng -url https://target.com -json -output out.json
-  recondeps-ng -url https://target.com -no... use -resolve=false for offline
+  recondeps -url https://target.com
+  recondeps -url https://target.com -json -output out.json
+  recondeps -url https://target.com -no... use -resolve=false for offline
 
 MASS
-  recondeps-ng -mass domains.txt -workers 100
-  recondeps-ng -mass domains.txt -resume            # continue an interrupted run
-  recondeps-ng -mass domains.txt -quiet -npm-rate 8
+  recondeps -mass domains.txt -workers 100
+  recondeps -mass domains.txt -resume            # continue an interrupted run
+  recondeps -mass domains.txt -quiet -npm-rate 8
 
 KEY FLAGS
   -resolve=false   offline: classify without hitting npm

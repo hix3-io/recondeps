@@ -1,5 +1,5 @@
 VERSION := $(shell cat VERSION)
-BIN := recondeps-ng
+BIN := recondeps
 LDFLAGS := -s -w -X 'main.VERSION=$(VERSION)'
 
 .PHONY: build install clean test fixtures vet fmt release-patch release-minor release-major

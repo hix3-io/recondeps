@@ -8,7 +8,7 @@ import (
 func displayHuman(res *ScanResult) {
 	line := strings.Repeat("=", 78)
 	fmt.Printf("\n%s\n", line)
-	fmt.Printf("recondeps-ng v%s — %s\n", VERSION, res.Target)
+	fmt.Printf("recondeps v%s — %s\n", VERSION, res.Target)
 	if res.Error != "" {
 		fmt.Printf("\033[31merror: %s\033[0m\n", res.Error)
 		return

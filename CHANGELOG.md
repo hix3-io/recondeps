@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to recondeps-ng. Versioning is semantic (MAJOR.MINOR.PATCH).
+All notable changes to recondeps. Versioning is semantic (MAJOR.MINOR.PATCH).
 
 ## v1.2.0 — 2026-07-06
 
@@ -56,7 +56,7 @@ Real-time visibility + hardening found by real-world-scale testing.
 
 ## v1.0.0 — 2026-07-06
 
-First release of the ground-up rewrite. `recondeps-ng` replaces the legacy
+First release of the ground-up rewrite. `recondeps` replaces the legacy
 `recondeps` (v0.6.7, regex-on-minified) whose value features were stubbed,
 buggy, or unreliable at scale. Full analysis of the old tool's gaps is what
 this release is built to close.

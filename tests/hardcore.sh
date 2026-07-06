@@ -6,7 +6,7 @@ set -uo pipefail
 cd "$(dirname "$0")/.."
 
 PORT=8900
-BIN=./recondeps-ng
+BIN=./recondeps
 
 python3 tests/gen_hardcore.py || { echo "fixture build failed (network?)"; exit 1; }
 ( cd tests/www-hard && python3 -m http.server $PORT >/tmp/hard_httpd.log 2>&1 & echo $! >/tmp/hard_httpd.pid )

@@ -5,7 +5,7 @@ set -uo pipefail
 cd "$(dirname "$0")/.."
 
 PORT=8899
-BIN=./recondeps-ng
+BIN=./recondeps
 PASS=0; FAIL=0
 
 python3 tests/gen_fixtures.py >/dev/null
