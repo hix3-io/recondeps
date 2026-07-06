@@ -1,0 +1,25 @@
+{
+  "name": "recondependencies",
+  "version": "1.0.0",
+  "description": "JavaScript dependency reconnaissance tool for supply chain analysis",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
+  },
+  "dependencies": {
+    "@swc/core": "^1.3.100",
+    "glob": "^10.3.10",
+    "minimist": "^1.2.8"
+  },
+  "keywords": [
+    "javascript",
+    "dependencies",
+    "ast",
+    "supply-chain",
+    "security",
+    "reconnaissance"
+  ],
+  "author": "Security Research",
+  "license": "MIT"
+}

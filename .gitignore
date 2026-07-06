@@ -1,0 +1,16 @@
+# compiled binary
+recondeps
+/recondeps-*
+*.exe
+# node
+node_modules/
+# NEVER commit scan output or target lists (real recon data)
+mass_scan_*/
+*_scan_*/
+output*/
+results*/
+*.zip
+# domain/target lists — keep only tiny generic test files
+[0-9]*.txt
+all.txt
+!test-domains.txt
