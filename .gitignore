@@ -14,3 +14,6 @@ results*/
 [0-9]*.txt
 all.txt
 !test-domains.txt
+
+# ng binary
+recondeps-ng
